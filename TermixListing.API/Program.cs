@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using TermixListing.API.Configurations;
+using TermixListing.API.Contracts;
 using TermixListing.API.Data;
+using TermixListing.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +29,12 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod());
 });
 
-builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom
+.Configuration(ctx.Configuration));
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
+builder.Services.AddScoped<IHotelRepository, HotelRepository>();
 
 var app = builder.Build();
 
