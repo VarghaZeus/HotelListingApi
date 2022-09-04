@@ -9,11 +9,13 @@ using TermixListing.API.Data;
 using AutoMapper;
 using TermixListing.API.Contracts;
 using TermixListing.API.Models.Hotel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TermixListing.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HotelsController : ControllerBase
     {
         private readonly IHotelRepository _hotelRepository;

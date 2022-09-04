@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TermixListing.API.Data;
 
@@ -11,9 +12,10 @@ using TermixListing.API.Data;
 namespace TermixListing.API.Migrations
 {
     [DbContext(typeof(termixListViewContext))]
-    partial class termixListViewContextModelSnapshot : ModelSnapshot
+    [Migration("20220903213341_AddedIdentityTables")]
+    partial class AddedIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,22 +49,6 @@ namespace TermixListing.API.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "5d8dba94-92cd-43b2-8282-422d1bf579da",
-                            ConcurrencyStamp = "0aa04f09-d90b-49d8-97bf-0af18501ceca",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "5a050a7a-6d47-4c90-aa5c-cd3d07af547e",
-                            ConcurrencyStamp = "7cfc52ee-bfba-4781-a218-41677f377f22",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
